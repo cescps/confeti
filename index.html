@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>confeti.</title>
+  <style>
+    /* Set the body and html to occupy the full viewport with a black background */
+    body, html {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      width: 100%;
+      background-color: #000;
+      overflow: hidden; /* Prevent scrollbars from appearing */
+      cursor: pointer; /* Change cursor to pointer to indicate clickability */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Include the Canvas Confetti library via CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    // Function to handle click/tap events
+    function handleClick(event) {
+      // For touch events, use changedTouches[0]
+      const isTouchEvent = event.type.startsWith('touch');
+      const x = isTouchEvent ? event.changedTouches[0].clientX : event.clientX;
+      const y = isTouchEvent ? event.changedTouches[0].clientY : event.clientY;
+
+      // Launch confetti from the click/tap position
+      confetti({
+        particleCount: 100,
+        spread: 70,
+        origin: {
+          x: x / window.innerWidth,
+          y: y / window.innerHeight
+        },
+        colors: ['#ff0a54', '#ff477e', '#ff7096', '#ff85a1', '#fbb1bd',
+                 '#f9bec7', '#f8cdda', '#d8a7b1', '#c49fb3', '#a3b1d8']
+      });
+    }
+
+    // Add the click and touch event listeners to the entire body
+    document.body.addEventListener('click', handleClick);
+    document.body.addEventListener('touchstart', handleClick);
+  </script>
+</body>
+</html>
